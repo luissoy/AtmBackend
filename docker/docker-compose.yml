@@ -1,0 +1,25 @@
+version: '1'
+
+services:
+  db:
+    image: mysql:8.3
+    restart: always
+    environment:
+      MYSQL_DATABASE: atm
+      MYSQL_USER: luissoy
+      MYSQL_PASSWORD: luissoy
+      MYSQL_ROOT_PASSWORD: luissoy
+    networks:
+      - internal_network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10000:8080
+    networks:
+      - internal_network
+
+networks:
+  internal_network:
+    driver: bridge
