@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: atm
+      MYSQL_USER: luissoy
+      MYSQL_PASSWORD: luissoy
+      MYSQL_ROOT_PASSWORD: luissoy
+    networks:
+      - internal_network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10000:8080
+    networks:
+      - internal_network
+
+  backend:
+    depends_on:
+      - db
+    build:
+      dockerfile: dockerfile
+    ports:
+      - 11000:8080
+    networks:
+      - internal_network
+
+networks:
+  internal_network:
+    driver: bridge
