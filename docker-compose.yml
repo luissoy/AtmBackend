@@ -1,35 +1,36 @@
 version: '2'
-
 services:
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_DATABASE: atm
-      MYSQL_USER: luissoy
-      MYSQL_PASSWORD: luissoy
-      MYSQL_ROOT_PASSWORD: luissoy
-    networks:
-      - internal_network
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 10000:8080
-    networks:
-      - internal_network
-
-  backend:
-    depends_on:
-      - db
+  app:
     build:
+      context: .
       dockerfile: dockerfile
     ports:
-      - 11000:8080
+      - 10000:8080
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/atm
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=luissoy
     networks:
-      - internal_network
+      - springboot-mysql-network
+
+  mysqldb:
+    image: mysql:8.0.30
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=atm
+      - MYSQL_ROOT_PASSWORD=luissoy
+    networks:
+      - springboot-mysql-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
 
 networks:
-  internal_network:
-    driver: bridge
+  springboot-mysql-network:
+    name: springboot-mysql-network
