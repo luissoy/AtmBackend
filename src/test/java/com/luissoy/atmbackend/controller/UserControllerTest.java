@@ -48,7 +48,7 @@ class UserControllerTests {
         user.setUsername("existingUsername");
 
         // When
-        when(userService.saveUser(user)).thenThrow(new DataIntegrityException("Username already exists"));
+        when(userService.saveUser(user)).thenThrow(new DataIntegrityException());
 
         // Then
         ResponseEntity<?> responseEntity = userController.saveUser(user);

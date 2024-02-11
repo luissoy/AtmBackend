@@ -48,7 +48,7 @@ class BankControllerTests {
         bank.setName("existingName");
 
         // When
-        when(bankService.saveBank(bank)).thenThrow(new DataIntegrityException("Bank name already exists"));
+        when(bankService.saveBank(bank)).thenThrow(new DataIntegrityException());
 
         // Then
         ResponseEntity<?> responseEntity = bankController.saveBank(bank);
