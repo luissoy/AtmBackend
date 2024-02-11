@@ -1,0 +1,24 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Ping endpoint for test connection"
+    },
+    {
+      "id": 2,
+      "name": "Data Base Schema"
+    },
+    {
+      "id": 3,
+      "name": "Create the docker files for the application and for the database"
+    },
+    {
+      "id": 4,
+      "name": "Develop everything related to the Users, Accounts and Banks tables."
+    },
+    {
+      "id": 5,
+      "name": "Documenting the API"
+    }
+  ]
+}
