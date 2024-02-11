@@ -57,7 +57,7 @@ class UserControllerTests {
     }
 
     @Test
-    public void registerUser_UsernameDoesNotExist_ReturnsCreatedResponse() {
+    public void registerUser_UsernameDoesNotExist() {
         // Given
         User user = new User();
         user.setUsername("newUsername");
