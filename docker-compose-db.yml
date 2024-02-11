@@ -1,0 +1,19 @@
+version: 'db'
+
+services:
+  db:
+    image: mysql:8.3
+    restart: always
+    environment:
+      MYSQL_DATABASE: atm
+      MYSQL_USER: luissoy
+      MYSQL_PASSWORD: luissoy
+      MYSQL_ROOT_PASSWORD: luissoy
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10000:8080
