@@ -29,12 +29,12 @@ class UserControllerTests {
     @Test
     public void getUsers() {
         // Given
-        User user1 = new User();
-        user1.setUsername("user");
-        List<User> userList = List.of(user1);
+        User user = new User();
+        user.setUsername("user");
+        List<User> users = List.of(user);
 
         // When
-        when(userService.getUsers()).thenReturn(userList);
+        when(userService.getUsers()).thenReturn(users);
 
         // Then
         List<User> retrievedUsers = userController.getUsers();
@@ -63,7 +63,7 @@ class UserControllerTests {
         user.setUsername("newUsername");
 
         // When
-        when(userService.saveUser(user)).thenReturn(user);;
+        when(userService.saveUser(user)).thenReturn(user);
 
         // Then
         ResponseEntity<?> responseEntity = userController.saveUser(user);
